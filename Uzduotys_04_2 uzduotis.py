@@ -1,13 +1,6 @@
-""" Sukurti  funkciją,  kuri  patikrintų,  ar paduotas Lietuvos piliečio asmens  kodas yra validus.
-Padaryti, kad programa sugeneruotų teisingą asmens kodą (panaudojus anksčiau sukurtą funkciją) pagal įvestą
-lytį, gimimo datą ir eilės numerį).
-Create a function that would check that the personal code of the Lithuanian citizen's personal code is valid.
-To make the program generate the correct personal identification code (using the feature previously created)
-according to the entered gender, date of birth and serial number)"""
 
-
-"""function to generate personal code 2nd to 8th digit"""
 def person_code(date_, birth_line):
+    """function to generate personal code 2nd to 8th digit"""
     birth_split = date_.split("-")
     year = birth_split[0][2:]
     month = birth_split[1]
@@ -15,8 +8,9 @@ def person_code(date_, birth_line):
     l_code = year + month + day + birth_line[0] + birth_line[1] + birth_line[2]
     return l_code
 
-"""function to generate 1st digit(female or male)"""
+
 def first_code_no(sex_person):
+    """function to generate 1st digit(female or male)"""
     l_code2 = person_code(date_of_birth, birth_sequence)
     if sex_person == "Female":
         if l_code2[0] != 2:
@@ -30,8 +24,9 @@ def first_code_no(sex_person):
             first = 5
     return first
 
-'''function to generate last control digit. Formula is official from Wiki'''
+
 def control_no():
+    '''function to generate last control digit. Formula is official from Wiki'''
     partial_code = person_code(date_of_birth, birth_sequence)
     a = first_code_no(sex)
     b = int(partial_code[0])
@@ -56,8 +51,9 @@ def control_no():
             k = 0
             return k
 
-'''function to validate given personal code(not generated)'''
+
 def personal_code_validator(p_code):
+    '''function to validate given personal code(not generated)'''
     last_digit = int(str(p_code)[-1])
     if last_digit == control_no():
         print('Valid')
